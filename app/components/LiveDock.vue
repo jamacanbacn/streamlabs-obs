@@ -71,7 +71,6 @@
         <a @click="refreshChat" v-if="isTwitch || isMixer || (isYoutube && isStreaming)">Refresh Chat</a>
       </div>
 
-   
       <div class="live-dock-chat" v-if="isTwitch || isMixer || (isYoutube && isStreaming)">
         <chat ref="chat" />
       </div>
