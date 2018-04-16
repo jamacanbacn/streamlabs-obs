@@ -3,7 +3,7 @@
   "description": "Streamlabs streaming software",
   "author": "General Workings, Inc.",
   "license": "GPL-3.0",
-  "version": "0.8.16",
+  "version": "0.8.17-preview.0",
   "main": "main.js",
   "scripts": {
     "compile": "yarn clear && webpack-cli --progress --mode development",
@@ -50,6 +50,9 @@
       "perMachine": true,
       "allowToChangeInstallationDirectory": true,
       "include": "installer.nsh"
+    },
+    "win": {
+      "rfc3161TimeStampServer": "http://timestamp.digicert.com"
     }
   },
   "ava": {
