@@ -10,6 +10,7 @@ import { SourceFiltersService } from '../../services/source-filters';
 import { WidgetsService } from 'services/widgets';
 import { CustomizationService } from 'services/customization';
 import { SelectionService } from 'services/selection/selection';
+import { ProjectorService } from 'services/projector';
 import electron from 'electron';
 
 interface IEditMenuOptions {
@@ -26,6 +27,7 @@ export class EditMenu extends Menu {
   @Inject() private widgetsService: WidgetsService;
   @Inject() private customizationService: CustomizationService;
   @Inject() private selectionService: SelectionService;
+  @Inject() private projectorService: ProjectorService;
 
   private scene = this.scenesService.getScene(this.options.selectedSceneId);
   private source: Source;
@@ -110,6 +112,12 @@ export class EditMenu extends Menu {
             label: visibilityLabel,
             click: () => {
               selectedItem.setVisibility(!selectedItem.visible);
+            }
+          });
+          this.append({
+            label: 'Create Source Projector',
+            click: () => {
+              this.projectorService.createProjector(selectedItem.sourceId);
             }
           });
         } else {
@@ -209,8 +217,6 @@ export class EditMenu extends Menu {
         click: () => this.scenesService.setLockOnAllScenes(false)
       });
 
-      this.append({ type: 'separator' });
-
       this.append({
         label: 'Performance Mode',
         type: 'checkbox',
@@ -220,6 +226,13 @@ export class EditMenu extends Menu {
         })
       });
     }
+
+    this.append({ type: 'separator' });
+
+    this.append({
+      label: 'Create Output Projector',
+      click: () => this.projectorService.createProjector()
+    });
 
   }
 

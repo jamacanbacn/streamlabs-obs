@@ -13,18 +13,10 @@ import { WidgetsService, WidgetDefinitions, WidgetType } from '../../services/wi
   mixins: [windowMixin]
 })
 export default class NameSource extends Vue {
-
-  @Inject()
-  sourcesService: ISourcesServiceApi;
-
-  @Inject()
-  scenesService: IScenesServiceApi;
-
-  @Inject()
-  widgetsService: WidgetsService;
-
-  @Inject()
-  windowsService: WindowsService;
+  @Inject() sourcesService: ISourcesServiceApi;
+  @Inject() scenesService: IScenesServiceApi;
+  @Inject() widgetsService: WidgetsService;
+  @Inject() windowsService: WindowsService;
 
   options: {
     sourceType?: TSourceType,
@@ -35,6 +27,8 @@ export default class NameSource extends Vue {
 
   name = '';
   error = '';
+
+  disabled = false;
 
   mounted() {
 
@@ -62,6 +56,9 @@ export default class NameSource extends Vue {
       this.windowsService.closeChildWindow();
     } else {
       let sourceId: string;
+
+      if (this.disabled) return;
+      this.disabled = true;
 
       if (this.sourceType != null) {
         const source = this.sourcesService.createSource(
