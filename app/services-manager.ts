@@ -26,7 +26,7 @@ import { VideoService } from './services/video';
 import { WidgetsService } from './services/widgets';
 import { WindowsService } from './services/windows';
 import { StatefulService } from './services/stateful-service';
-import { ScenesTransitionsService } from './services/scenes-transitions';
+import { TransitionsService } from 'services/transitions';
 import { FontLibraryService } from './services/font-library';
 import { SourceFiltersService } from './services/source-filters';
 import { AppService } from './services/app';
@@ -65,6 +65,7 @@ import { JsonrpcService } from './services/jsonrpc/jsonrpc';
 import { FileManagerService } from 'services/file-manager';
 import { PatchNotesService } from 'services/patch-notes';
 import { ProtocolLinksService } from 'services/protocol-links';
+import { WebsocketService } from 'services/websocket';
 import { ProjectorService } from 'services/projector';
 
 const { ipcRenderer } = electron;
@@ -100,7 +101,6 @@ export class ServicesManager extends Service {
     PerformanceService,
     PerformanceMonitorService,
     PersistentStatefulService,
-    ScenesTransitionsService,
     SettingsService,
     SourceFiltersService,
     SourcesService,
@@ -134,7 +134,9 @@ export class ServicesManager extends Service {
     FileManagerService,
     PatchNotesService,
     ProtocolLinksService,
-    ProjectorService
+    WebsocketService,
+    ProjectorService,
+    TransitionsService
   };
 
   private instances: Dictionary<Service> = {};

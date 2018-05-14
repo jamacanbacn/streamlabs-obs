@@ -13,28 +13,28 @@
       class="tab-button"
       :class="{ active: page === 'Dashboard' }"
       :disabled="!isUserLoggedIn || locked">
-      <i class="fa fa-tachometer"/> Dashboard
+      <i class="icon-dashboard"/> Dashboard
     </button>
     <button
       @click="navigateOverlays"
       class="tab-button"
       :class="{ active: page === 'BrowseOverlays' }"
       :disabled="!isUserLoggedIn || locked">
-      <i class="fa fa-image"/> Library
+      <i class="icon-themes"/> Themes
     </button>
     <button
       @click="navigateStudio"
       class="tab-button"
       :class="{ active: page === 'Studio' }"
       :disabled="locked">
-      <i class="fa fa-object-group"/> Editor
+      <i class="icon-studio"/> Editor
     </button>
     <button
       @click="navigateLive"
       class="tab-button"
       :class="{ active: page === 'Live' }"
       :disabled="!isUserLoggedIn || locked">
-      <i class="fa fa-feed"/> Live
+      <i class="icon-live-dashboard"/> Live
     </button>
   </div>
 
@@ -49,6 +49,13 @@
     <div class="top-nav-item" v-if="isDevMode">
       <a class="link" @click="openDevTools">Dev Tools</a>
     </div>
+    <div class="top-nav-item" :class="{ 'top-nav-item--active': studioModeEnabled }">
+      <a
+        @click="studioMode"
+        class="link link--uppercase">
+        <i class="icon-studio-mode-3" v-tooltip.right="studioModeTooltip" /><span>Studio Mode</span>
+      </a>
+    </div>
     <div class="top-nav-item">
       <a class="link link--uppercase" @click="bugReport">
         <i class="fa fa-bug"/><span>Bug Report</span>
@@ -58,14 +65,14 @@
       <a
         @click="openDiscord"
         class="link link--uppercase">
-        <i class="ico ico--discord"></i><span>Discord</span>
+        <i class="icon-discord"></i><span>Discord</span>
       </a>
     </div>
     <div class="top-nav-item">
       <a
         @click="openSettingsWindow"
         class="link link--uppercase">
-        <i class="fa fa-cog"/><span>Settings</span>
+        <i class="icon-settings"/><span>Settings</span>
       </a>
     </div>
     <div class="top-nav-item">
@@ -104,6 +111,14 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
+
+  &.top-nav-item--active {
+    >a {
+      >i, >span {
+        color: @teal;
+      }
+    }
+  }
 
   @media(max-width: 1200px) {
     font-size: 12px;
